@@ -32,6 +32,9 @@
             // echo $cards["value"]." of ".$cards["suits"];
             echo "<img src='$imgurl'>";
         }
+        
+        echo "hello";
     ?>
+    
     
 </html>
