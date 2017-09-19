@@ -42,7 +42,6 @@
             return $card; 
         }
         
-        
         function generateDeck() {
             $cards = array(); 
         
@@ -50,14 +49,10 @@
                 array_push($cards, $i); 
             }
             
-            
             shuffle($cards); 
-            
             return $cards; 
- 
         }
-        
-        
+    
         function printDeck($deck) {
             for ($i = 0; $i < count($deck); $i++) {
                 $cardNum = $deck[$i]; // number between 0 and 51
@@ -75,31 +70,23 @@
                 $card = mapNumberToCard($cardNum); 
                 array_push($hand, $card); 
             }
-            
             return $hand; 
         }
         
         $deck = generateDeck(); 
         //printDeck($deck); 
         
-        
-        
         // function that generates a "hand" of cards for one person (no duplicates)
         
-        
-            
         $person = array(
             "name" => "Akoni", 
             "profilePicUrl" => "./profile_pics/akoni.png", 
             "cards" => generateHand($deck)
             ); 
                 
-            
-            
             function displayPerson($person) {
                 // show profile pic
                 echo "<img src='".$person["profilePicUrl"]."'>"; 
-                
                 
                 // iterate through $person's "cards"
                 
@@ -111,10 +98,8 @@
                     // translate this to HTML 
                     echo "<img src='".$card["imgURL"]."'>"; 
                 }
-                
                 echo calculateHandValue($person["cards"]); 
             }
-            
             
             function calculateHandValue($cards) {
                 $sum = 0; 
@@ -122,14 +107,9 @@
                 foreach ($cards as $card) {
                     $sum += $card["num"]; 
                 }
-                
                 return $sum; 
             }
-            
             displayPerson($person); 
-            
-            
-        
         ?>
     </body>
 </html>
