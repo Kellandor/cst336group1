@@ -1,38 +1,6 @@
 <?php
-    function displayHand(){
-        $person = array(
-            "cards"=> array(
-                array(
-                    "suits"=> "hearts",
-                    "value"=> "7"
-                    ),
-                array(
-                    "suits"=> "spades",
-                    "value"=> "13"
-                    )
-                )
-            );
-        for($i=0; $i<count($person["cards"]); $i++)
-        {
-            $cards = $person["cards"][$i];
-            $imgurl = "./cards/".$cards["suits"]."/".$cards["value"].".png";
-            echo "<img src='$imgurl'>";
-        }
-    }
-  
-  function deck(){
-      $cards = array();
-      
-      for($i = 0; $i < 52; $i++)
-      {
-          array_push($cards,$i);
-      }
-      
-      shuffle($cards);
-      
-      return $cards;
-  }  
-  
+
+
   function mapCards($num){
       $cardValue = ($num % 13) + 1;
       $cardSuit = floor($num/13);
@@ -55,26 +23,88 @@
                 break;
       }
       
-      echo "$cardValue<br/>";
-      echo "$cardSuit<br/>";
-      echo "$suitStr<br/>";
-      
-      $imgurl = "./cards/".$suitStr."/".$cardValue.".png";
-      echo "<img src='$imgurl'><br/>";
-      
-      $cards = array(
+      $card = array(
           'num' => $cardValue,
           'suit' => $cardSuit,
           'imgURL' => "./cards/".$suitStr."/".$cardValue.".png");
+          
+    return $card;
   }
   
   function generate(){
-    $deck = deck();
       
-    shuffle($deck);
+    $cards = array();
     
-    for($i = 0; $i < count($deck); $i++)
-        mapCards(array_pop($deck));
+    for($i = 0; $i < 52; $i++)
+        array_push($cards,$i);
+        
+    shuffle($cards);
+    
+    return $cards;
+  }
+  
+  function printDeck($deck)
+  {
+      for($i =0; $i < count($deck);$i++)
+      {
+          $cardNum = $deck[$i];
+          $card = mapCards($cardNum);
+          
+        //   echo "imgURL: ".$card["imgURL"]."<br/>";
+          echo '<img src='.$card["imgURL"].'><br/>';
+      }
   }
 
+
+    function deal($deck)
+    {
+        $hand = array();
+        $sum = 0;
+        while($sum <= 37)
+        {
+            $cardnumber = array_pop($deck);
+            $card = mapCards($cardnumber);
+            array_push($hand, $card);
+            $sum += $card["num"];
+        }
+        
+        return $hand;
+    }
+
+
+    function dealHand($deck){
+        for($i = 0; $i < 4; $i++){
+        $hand = array();
+        $sum = 0;
+        while($sum <= 37)
+        {
+            $cardnumber = array_pop($deck);
+            $card = mapCards($cardnumber);
+            array_push($hand, $card);
+            $sum += $card["num"];
+        }
+        
+        ${'person'.$i} = array(
+            "profilePic" => "./profile/profile.jpg",
+            "cards"=> $hand
+            );
+        }
+        for($i = 0; $i < 4; $i++)
+        {
+            $sum = 0;
+            echo "<img src='".${'person'.$i}["profilePic"]."'>";
+            for($j=0; $j<count(${'person'.$i}["cards"]); $j++)
+            {
+                $cards = ${'person'.$i}["cards"][$j];
+    
+                echo "<img src='".$cards["imgURL"]."'>";
+                $sum += $cards["num"];
+            }
+            echo $sum;
+            echo "<br/>";
+        }
+    }
+
+
+ 
 ?>

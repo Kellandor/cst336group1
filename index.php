@@ -4,17 +4,11 @@
 ?>
 <html>
     <head>
-        
     </head>
-    <form method="post">
-    <input type="submit" name="test" value="RUN" /><br/>
-    </form>
-    
+    <body>
     <?php
-        if(array_key_exists('test',$_POST)){
-        displayHand();
-        }
-        generate();
-?>
-    
+        $deck = generate();
+        dealHand($deck);
+    ?>
+     </body>
 </html>
