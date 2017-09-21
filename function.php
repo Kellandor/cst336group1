@@ -92,7 +92,8 @@
             ${'person'.$i} = array(
                 "profilePic" => "./profile/profile.". ($i + 1) . ".jpg",
                 "cards" => $hand,
-                "sum" => 0
+                "sum" => 0,
+                "name" => "Assembly Unit Number: " . rand()
                 );
         }
         
@@ -127,7 +128,7 @@
         echo "<figure>";
         echo "<img src='".${'person'.$winnerIndex}["profilePic"]."'>";
         echo "<figcaption>";
-        echo "Assembly Unit Number: " . rand();
+        echo ${'person'.$winnerIndex}["name"];
         echo "</figcaption>";
         echo "</figure>";
         echo "</div>";
