@@ -1,6 +1,4 @@
 <?php
-
-
   function mapCards($num){
       $cardValue = ($num % 13) + 1;
       $cardSuit = floor($num/13);
@@ -54,8 +52,6 @@
           echo '<img src='.$card["imgURL"].'><br/>';
       }
   }
-
-
     function deal($deck)
     {
         $hand = array();
@@ -70,12 +66,12 @@
         
         return $hand;
     }
-
-
     function dealHand($deck){
         $totalSum = 0;
         $winnerIndex;
         $winnerSum;
+        
+        echo "<h1>Silverjack</h1>";
         
         for($i = 0; $i < 4; $i++) {
             $hand = array();
@@ -100,7 +96,7 @@
         for($i = 0; $i < 4; $i++)
         {
             $sum = 0;
-            echo "<img src='".${'person'.$i}["profilePic"]."'>";
+            echo "<img id='profile' src='".${'person'.$i}["profilePic"]."'>";
             for($j=0; $j<count(${'person'.$i}["cards"]); $j++)
             {
                 $cards = ${'person'.$i}["cards"][$j];
@@ -116,8 +112,8 @@
                 $winnerSum = $sum;
             }
                 
-            echo $sum;
-            echo "<br/>";
+            echo "<div id='sum'>" . $sum;
+            echo "</div><br/>";
             $totalSum += $sum;
         }
         
@@ -143,7 +139,5 @@
         //                                     https://www.youtube.com/watch?v=wRRsXxE1KVY
         return $cDist <= $jDist;
     }
-
-
  
 ?>
