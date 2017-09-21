@@ -73,22 +73,30 @@
 
 
     function dealHand($deck){
-        for($i = 0; $i < 4; $i++){
-        $hand = array();
-        $sum = 0;
-        while($sum <= 37)
-        {
-            $cardnumber = array_pop($deck);
-            $card = mapCards($cardnumber);
-            array_push($hand, $card);
-            $sum += $card["num"];
+        $totalSum = 0;
+        $winnerIndex;
+        $winnerSum;
+        
+        for($i = 0; $i < 4; $i++) {
+            $hand = array();
+            $sum = 0;
+            
+            while($sum <= 37)
+            {
+                $cardnumber = array_pop($deck);
+                $card = mapCards($cardnumber);
+                array_push($hand, $card);
+                $sum += $card["num"];
+            }
+            
+            ${'person'.$i} = array(
+                "profilePic" => "./profile/profile.". ($i + 1) . ".jpg",
+                "cards" => $hand,
+                "sum" => 0
+                );
         }
         
-        ${'person'.$i} = array(
-            "profilePic" => "./profile/profile.jpg",
-            "cards"=> $hand
-            );
-        }
+        $winnerSum = 0;
         for($i = 0; $i < 4; $i++)
         {
             $sum = 0;
@@ -100,9 +108,40 @@
                 echo "<img src='".$cards["imgURL"]."'>";
                 $sum += $cards["num"];
             }
+            
+            ${'person'.$i}["sum"] = $sum;
+            
+            if (closerTo42($sum, $winnerSum)) {
+                $winnerIndex = $i;
+                $winnerSum = $sum;
+            }
+                
             echo $sum;
             echo "<br/>";
+            $totalSum += $sum;
         }
+        
+        echo "<br/>";
+        echo "<div class = 'winner'>";
+        echo "<h3>And the winner, with $totalSum points, is!</h3>";
+        echo "<figure>";
+        echo "<img src='".${'person'.$winnerIndex}["profilePic"]."'>";
+        echo "<figcaption>";
+        echo "Assembly Unit Number: " . rand();
+        echo "</figcaption>";
+        echo "</figure>";
+        echo "</div>";
+        
+    }
+    
+    function closerTo42($challenger, $JohnCena) {
+        // get their absolute distance from 42. 0 means they got 42
+        $cDist = abs(42 - $challenger);
+        $jDist = abs(42 - $JohnCena);
+        
+        // did the challenger beat JOHN CENA?! https://www.youtube.com/watch?v=RZIhpba83hY
+        //                                     https://www.youtube.com/watch?v=wRRsXxE1KVY
+        return $cDist <= $jDist;
     }
 
 
