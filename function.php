@@ -88,7 +88,8 @@
             ${'person'.$i} = array(
                 "profilePic" => "./profile/profile.". ($i + 1) . ".jpg",
                 "cards" => $hand,
-                "sum" => 0
+                "sum" => 0,
+                "name" => "Assembly Unit Number: " . rand()
                 );
         }
         
@@ -123,7 +124,7 @@
         echo "<figure>";
         echo "<img src='".${'person'.$winnerIndex}["profilePic"]."'>";
         echo "<figcaption>";
-        echo "Assembly Unit Number: " . rand();
+        echo ${'person'.$winnerIndex}["name"];
         echo "</figcaption>";
         echo "</figure>";
         echo "</div>";
@@ -131,6 +132,8 @@
     }
     
     function closerTo42($challenger, $JohnCena) {
+        return ($challenger <= 42 && $challenger > $JohnCena);
+        /*
         // get their absolute distance from 42. 0 means they got 42
         $cDist = abs(42 - $challenger);
         $jDist = abs(42 - $JohnCena);
@@ -138,6 +141,7 @@
         // did the challenger beat JOHN CENA?! https://www.youtube.com/watch?v=RZIhpba83hY
         //                                     https://www.youtube.com/watch?v=wRRsXxE1KVY
         return $cDist <= $jDist;
+        */
     }
  
 ?>
