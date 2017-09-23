@@ -66,10 +66,26 @@
         
         return $hand;
     }
+    
+    $folder = "./profile/";
+    $pictures = array("Vader.png", "Trooper-1.png", "Trooper-2.png", "Trooper-3.png", "Trooper-4.png", "Trooper-5.png", "Trooper-6.png", "Trooper-7.png");
+    function randomPicture() {
+        global $folder, $pictures;
+        
+        shuffle($pictures);
+        
+        return $folder . array_pop($pictures);
+        
+        // return $folder . $pictures[rand(0, count($pictures) - 1)];
+        
+        // return "./profile/new/Vader.png";
+    }
+    
     function dealHand($deck){
         $totalSum = 0;
         $winnerIndex;
         $winnerSum;
+        
         
         echo "<h1>Silverjack</h1>";
         
@@ -86,7 +102,8 @@
             }
             
             ${'person'.$i} = array(
-                "profilePic" => "./profile/profile.". ($i + 1) . ".jpg",
+                /*"profilePic" => "./profile/profile.". ($i + 1) . ".jpg",*/
+                "profilePic" => randomPicture(),
                 "cards" => $hand,
                 "sum" => 0,
                 "name" => "Assembly Unit Number: " . rand()
